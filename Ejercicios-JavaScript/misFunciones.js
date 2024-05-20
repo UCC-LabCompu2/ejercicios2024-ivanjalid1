@@ -8,39 +8,42 @@
 
 
 function convertirUnidades(nombre, valor){
-    console.log("bandera de convertir unidades")
-
+    let varMetro, varPulgada, varPie, varYarda;
     if(isNaN(valor)){
         alert("El valor ingresado no es un número");
 
-        document.getElementById("metro").value = "";
-        document.getElementById("pulgada").value = "";
-        document.getElementById("pie").value = "";
-        document.getElementById("yarda").value = "";
+        varMetro = "";
+        varPulgada = "";
+        varPie = "";
+        varYarda = "";
 
     }   else if(nombre === "metro"){
-
-        document.getElementById("pulgada").value = valor*39.7;
-        document.getElementById("pie").value = valor*3.24;
-        document.getElementById("yarda").value = valor*1.093;
+        varMetro = valor;
+        varPulgada = valor * 39.7;
+        varPie = valo r* 3.24;
+        varYarda = valor * 1.093;
 
     }   else if(nombre === "pulgada"){
-
-        document.getElementById("metro").value = valor/39.7; // hacer todas las conversiones correctas
-        document.getElementById("pie").value = valor*3.24;
-        document.getElementById("yarda").value = valor*1.093;
+        varPulgada = valor;
+        varMetro = valor / 39.7; // hacer todas las conversiones correctas
+        varPie = valor * 3.24;
+        varYarda = valor * 1.093;
 
     }   else if(nombre === "pie"){
-
-        document.getElementById("pulgada").value = valor*39.7;
-        document.getElementById("pie").value = valor*3.24;
-        document.getElementById("yarda").value = valor*1.093;
+        varPie = valor;
+        varMetro = valor * 0.038;
+        varPulgada = valor * 39.7;
+        varYarda = valor * 1.093;
 
     }   else if(nombre === "yarda"){
-
-        document.getElementById("pulgada").value = valor*39.7;
-        document.getElementById("pie").value = valor*3.24;
-        document.getElementById("yarda").value = valor*1.093;
+        varYarda = valor;
+        varPulgada = valor * 39.7;
+        varPie = valor * 3.24;
+        varMetro = valor * 0.91;
     }
+    document.getElementById("metro").value = varMetro;
+    document.getElementById("pulgada").value = varPulgada;
+    document.getElementById("pie").value = varPie;
+    document.getElementById("yarda").value = varYarda;
 
 }
