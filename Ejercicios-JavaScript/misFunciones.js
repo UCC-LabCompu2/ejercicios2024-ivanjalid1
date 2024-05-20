@@ -7,7 +7,7 @@
 */
 
 
-function convertirUnidades(nombre, valor){
+convertirUnidades = (nombre, valor) => {
     let varMetro, varPulgada, varPie, varYarda;
     if(isNaN(valor)){
         alert("El valor ingresado no es un número");
@@ -20,7 +20,7 @@ function convertirUnidades(nombre, valor){
     }   else if(nombre === "metro"){
         varMetro = valor;
         varPulgada = valor * 39.7;
-        varPie = valo r* 3.24;
+        varPie = valor * 3.24;
         varYarda = valor * 1.093;
 
     }   else if(nombre === "pulgada"){
@@ -45,5 +45,33 @@ function convertirUnidades(nombre, valor){
     document.getElementById("pulgada").value = varPulgada;
     document.getElementById("pie").value = varPie;
     document.getElementById("yarda").value = varYarda;
-
 }
+
+
+function convertirGR(id){
+    if(id==="grados"){
+        let grad = document.getElementById("grados").value;
+        let rad = grad*Math.PI/180;
+    } else if (id === "rad"){
+        let rad = document.getElementById("rad").value;
+        let grad = rad*180/Math.PI;
+        document.getElementById("grados").value = grad;
+    }
+}
+
+let mostrarOcultar = (valorMo) => { 
+    if (valorMo === "val_mostrar"){
+        document.getElementById("divMo").style.display = 'block';
+    } else if(valorMo === "val_ocultar"){
+        document.getElementById("divMo").style.display = 'none';
+    }
+}
+
+let suma = () => {
+    let num1, num2;
+    num1 = Number(document.getElementsByName("sum_num1")[0].value); // se indica el indice porque es un array y buscamos solo el primer objeto
+    num2 = Number(document.getElementsByName("sum_num2")[0].value);
+    document.getElementsByName("sum_total")[0].value = num1 + num2;
+} 
+
+// hacer resta, mult, division
