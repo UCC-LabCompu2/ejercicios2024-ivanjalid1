@@ -154,3 +154,125 @@ let obtenerValores = () => {
     // document.getElementById("dist").value = cantidad + " " + unidad;
     document.getElementById("dist").value = `${cantidad} ${unidad}`;
 }
+
+// hoy
+let guardarLs = () => {
+    const distancia = document.getElementById("distancia").value;
+    const unidad = document.getElementsByName("unidades")[0].value;
+    // const unidad = document.getElementByID("unidades")[0].value;
+
+    localStorage.setItem("distanciaLs", distancia);
+    localStorage.setItem("unidadesLs", unidad);
+    window.open("2_web.html");
+}
+
+let cargarLs = () => {
+    const distancia = localStorage.getItem("distanciaLs");
+    const unidad = localStorage.getItem("unidadesLs");
+    document.getElementById("dist").value = distancia + " " + unidad;
+}
+
+let dibujarCirculoCuadrado = () =>{
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+
+    const yMax = canvas.height;
+    ctx.fillStyle = "#ff0bb2";
+    const lado = 100;
+    const margen = 5;
+    ctx.fillRect(0 + margen, yMax-lado-margen, lado, lado);
+
+    const xMax = canvas.width;
+    ctx.fillStyle = "#000000";
+    ctx.arc(xMax/2, yMax/2, 50, 0, 2*Math.PI);
+    ctx.fill();
+
+}
+
+/**
+ * Descripción: Carga la funcion de dibujar en el lienzo
+ * @method cargarListeners
+ */
+let cargarListeners = () => {
+    document.getElementById("lienzo").addEventListener("mousemove", dibujar);
+}
+
+var bandera;
+
+/**
+ * Descripción: Dibuja una linea que deterina el usuario con el mouse
+ * @method dibujar
+ * @param {event}event
+ */
+let dibujar = (event) => {
+    const canvas = document.getElementById("lienzo");
+    const ctx = canvas.getContext("2d");
+
+    let posX = event.clientX; // traigo la posición exacta del mouse en x
+    let posY = event.clientY;
+    console.log(posX, posY);
+
+    canvas.onmousedown = function () {bandera = true}
+    canvas.onmouseup = function () {bandera = false}
+
+    ctx.fillStyle = "#ff0034";
+    if(bandera){
+        ctx.fillRect(posX, posY, 5, 5);
+    }
+
+}
+
+/**
+ * Descripción: Limpia el canvas
+ * @method limpiarCanvas
+ */
+let limpiarCanvas = () => {
+    const canvas = document.getElementById("lienzo");
+    canvas.width = canvas.width;
+}
+
+let dibujarCuadriculado = () => {
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const anchoMax = canvas.width;
+    const alturaMax = canvas.height;
+    const paso = 20;
+
+    for(let i = paso; i < alturaMax;){ // Se hacen lineas horizontales
+        ctx.beginPath();
+        ctx.moveTo(0, i);
+        ctx.lineTo(anchoMax, i);
+        ctx.strokeLine = "#000000";
+        ctx.stroke();
+        ctx.closePath();
+        i += paso;
+
+    }
+    for(let i = paso; i < anchoMax;){ // Se hacen lineas verticales
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, alturaMax);
+        ctx.strokeLine = "#000000";
+        ctx.stroke();
+        ctx.closePath();
+        i += paso;
+    }
+
+    // dibujar eje X
+    ctx.beginPath();
+    ctx.moveTo(0, alturaMax/2);
+    ctx.lineTo(anchoMax, alturaMax/2);
+    ctx.strokeStyle = "#ffffff";
+    ctx.stroke();
+    ctx.closePath();
+
+    // eje y
+    ctx.beginPath();
+    ctx.moveTo(anchoMax/2, 0);
+    ctx.lineTo(anchoMax/2, alturaMax);
+    ctx.strokeStyle = "#ffffff";
+    ctx.stroke();
+    ctx.closePath();
+}
