@@ -260,7 +260,7 @@ let dibujarCuadriculado = () => {
         i += paso;
     }
 
-    // dibujar eje X
+    // Dibujar eje X
     ctx.beginPath();
     ctx.moveTo(0, alturaMax/2);
     ctx.lineTo(anchoMax, alturaMax/2);
@@ -268,11 +268,87 @@ let dibujarCuadriculado = () => {
     ctx.stroke();
     ctx.closePath();
 
-    // eje y
+    // Eje y
     ctx.beginPath();
     ctx.moveTo(anchoMax/2, 0);
     ctx.lineTo(anchoMax/2, alturaMax);
     ctx.strokeStyle = "#ffffff";
     ctx.stroke();
     ctx.closePath();
+
+    // Escribir en el eje x
+    
+    let numX = -20;
+    ctx.font = "Arial";
+    ctx.fillStyle = "red";
+    for(let i = 0; i < anchoMax;){
+        ctx.fillText(String(numX), i, alturaMax/2);
+        i += paso;
+        numX++;
+    }
+
+    // Escribir en el eje y
+    let numY = -15;
+    ctx.font = "Arial";
+    ctx.fillStyle = "red";
+    for(let i = 0; i < alturaMax;){
+        ctx.fillText(String(numY), anchoMax/2, i);
+        i += paso;
+        numY++;
+    }
+}
+
+
+function dibujarImagen(posX, posY){
+
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = canvas.width;
+
+    const img = new Image();
+    img.src = "images/auto.png";
+
+    if(posX < 0 || posY < 0){
+        mostrarDialog();
+    } else if (posX > canvas.width || posY > canvas.height){
+        mostrarDialog();
+    } else{
+        img.onload = function () {
+            ctx.drawImage(img, posX, posY);
+        }
+    }
+}
+
+let mostrarDialog = () => {
+    const dialog = document.getElementById("myDialog");
+    dialog.showModal();
+}
+
+let cerrarDialog = () => {
+    const dialog = document.getElementById("myDialog");
+    dialog.clos
+}
+
+_x = 0;
+_dx= 2;
+
+function animarAuto(posX, posY){
+
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = canvas.width;
+
+    const img = new Image();
+    img.src = "images/auto.png";
+
+    if(posX < 0 || posY < 0){
+        mostrarDialog();
+    } else if (posX > canvas.width || posY > canvas.height){
+        mostrarDialog();
+    } else{
+        img.onload = function () {
+            ctx.drawImage(img, posX, posY);
+        }
+    }
+    _x += _dx;
 }
