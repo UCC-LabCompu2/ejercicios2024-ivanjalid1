@@ -7,6 +7,7 @@
 */
 
 
+
 let convertirUnidades = (nombre, valor) => {
     let varMetro, varPulgada, varPie, varYarda;
 
@@ -324,16 +325,46 @@ let mostrarDialog = () => {
     dialog.showModal();
 }
 
-let cerrarDialog = () => {
+/*let cerrarDialog = () => {
     const dialog = document.getElementById("myDialog");
     dialog.clos
-}
+}*/
 
 _x = 0;
 _dx= 2;
 
-function animarAuto(posX, posY){
+function animarAuto(){
 
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const img = new Image();
+    img.src = "images/auto.png";
+
+    img.onload = function () {
+        canvas.width = canvas.width;
+        ctx.drawImage(img, x, 100);
+    }
+    if(_x > canvas.width){
+        x = 0;
+    }
+    _x += _dx;
+}
+
+var intervalID;
+
+function comenzarAnimacion () {
+    intervalID = setInterval(animarAuto, 15);
+    setTimeout(detenerAuto, 6000);
+}
+
+function detenerAuto(){
+    clearInterval(intervalID);
+}
+// 3
+
+function animarAutoNuevo() {
+    
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
     canvas.width = canvas.width;
@@ -341,14 +372,24 @@ function animarAuto(posX, posY){
     const img = new Image();
     img.src = "images/auto.png";
 
-    if(posX < 0 || posY < 0){
-        mostrarDialog();
-    } else if (posX > canvas.width || posY > canvas.height){
-        mostrarDialog();
-    } else{
-        img.onload = function () {
-            ctx.drawImage(img, posX, posY);
-        }
+    img.onload = function () {
+        canvas.width = canvas.width;
+        ctx.drawImage(img, x, 100);
+        animarId = requestAnimationFrame(animarAutoNuevo);
     }
+
     _x += _dx;
+    if(_x > canvas.width){
+        x = 0;
+    }
+}
+// 4
+var animarId;
+function animarNuevo(){
+    setTimeout(cancelarNuevaAnimacion, 6000);
+    requestAnimationFrame(animarAutoNuevo);
+}
+
+function cancelarNuevaAnimacion(){
+    cancelAnimationFrame(animarId);
 }
