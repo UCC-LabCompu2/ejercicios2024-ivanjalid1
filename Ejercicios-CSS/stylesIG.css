@@ -1,0 +1,14 @@
+img {
+    width: 100%;
+}
+@media (width >= 600px){
+    body{
+        column-count: 3;
+    }
+}
+@media (width < 600px){
+    body{
+        column-count: 1;
+    }
+}
+
