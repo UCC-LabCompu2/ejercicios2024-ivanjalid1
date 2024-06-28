@@ -325,10 +325,10 @@ let mostrarDialog = () => {
     dialog.showModal();
 }
 
-/*let cerrarDialog = () => {
+let cerrarDialog = () => {
     const dialog = document.getElementById("myDialog");
-    dialog.clos
-}*/
+    dialog.close();
+}
 
 _x = 0;
 _dx= 2;
@@ -383,13 +383,12 @@ function animarAutoNuevo() {
         x = 0;
     }
 }
-// 4
-var animarId;
+
 function animarNuevo(){
     setTimeout(cancelarNuevaAnimacion, 6000);
     requestAnimationFrame(animarAutoNuevo);
 }
 
 function cancelarNuevaAnimacion(){
-    cancelAnimationFrame(animarId);
+    cancelAnimationFrame(intervalID);
 }
