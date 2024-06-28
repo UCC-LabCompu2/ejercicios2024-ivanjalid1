@@ -156,7 +156,10 @@ let obtenerValores = () => {
     document.getElementById("dist").value = `${cantidad} ${unidad}`;
 }
 
-// hoy
+/**
+ * Descripción: Guarda la distancia y la unidad seleccionada en el localStorage y abre una nueva página web.
+ * @method guardarLs
+ */
 let guardarLs = () => {
     const distancia = document.getElementById("distancia").value;
     const unidad = document.getElementsByName("unidades")[0].value;
@@ -166,13 +169,19 @@ let guardarLs = () => {
     localStorage.setItem("unidadesLs", unidad);
     window.open("2_web.html");
 }
-
+/**
+ * Descripción: Carga la distancia y la unidad almacenada en localStorage y las muestra en un campo de texto.
+ * @method cargarLs
+ */
 let cargarLs = () => {
     const distancia = localStorage.getItem("distanciaLs");
     const unidad = localStorage.getItem("unidadesLs");
     document.getElementById("dist").value = distancia + " " + unidad;
 }
-
+/**
+ * Descripción: Dibuja un cuadrado y un círculo en el canvas.
+ * @method dibujarCirculoCuadrado
+ */
 let dibujarCirculoCuadrado = () =>{
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
@@ -299,8 +308,14 @@ let dibujarCuadriculado = () => {
     }
 }
 
+/**
+ * Descripción: Dibuja una imagen en el canvas en la posición especificada
+ * @method dibujarImagen
+ * @param {number} posX - Posición X de la imagen
+ * @param {number} posY - Posición Y de la imagen
+ */
 
-function dibujarImagen(posX, posY){
+let dibujarImagen = (posX, posY) => {
 
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
@@ -319,12 +334,18 @@ function dibujarImagen(posX, posY){
         }
     }
 }
-
+/**
+ * Descripción: Muestra un cuadro de diálogo
+ * @method mostrarDialog
+ */
 let mostrarDialog = () => {
     const dialog = document.getElementById("myDialog");
     dialog.showModal();
 }
-
+/**
+ * Descripción: Cierra el cuadro de diálogo
+ * @method cerrarDialog
+ */
 let cerrarDialog = () => {
     const dialog = document.getElementById("myDialog");
     dialog.close();
@@ -332,8 +353,11 @@ let cerrarDialog = () => {
 
 _x = 0;
 _dx= 2;
-
-function animarAuto(){
+/**
+ * Descripción: Animación que mueve el auto en el canvas
+ * @method animarAuto
+ */
+let animarAuto = () =>{
 
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
@@ -343,27 +367,36 @@ function animarAuto(){
 
     img.onload = function () {
         canvas.width = canvas.width;
-        ctx.drawImage(img, x, 100);
+        ctx.drawImage(img, _x, 100);
     }
     if(_x > canvas.width){
-        x = 0;
+        _x = 0;
     }
     _x += _dx;
 }
 
-var intervalID;
+let intervalID;
 
-function comenzarAnimacion () {
+/**
+ * Descripción: Inicia la animación del auto
+ * @method comenzarAnimacion
+ */
+let comenzarAnimacion = () => {
     intervalID = setInterval(animarAuto, 15);
     setTimeout(detenerAuto, 6000);
 }
-
-function detenerAuto(){
+/**
+ * Descripción: Detiene la animación continua del auto
+ * @method detenerAuto
+ */
+let detenerAuto = () =>{
     clearInterval(intervalID);
 }
-// 3
-
-function animarAutoNuevo() {
+/**
+ * Descripción: Animación que mueve un auto en el canvas
+ * @method animarAutoNuevo
+ */
+let animarAutoNuevo = () =>{
     
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
@@ -383,12 +416,18 @@ function animarAutoNuevo() {
         x = 0;
     }
 }
-
-function animarNuevo(){
+/**
+ * Descripción: Inicia una nueva animación continua del auto
+ * @method animarNuevo
+ */
+let animarNuevo = () => {
     setTimeout(cancelarNuevaAnimacion, 6000);
     requestAnimationFrame(animarAutoNuevo);
 }
-
-function cancelarNuevaAnimacion(){
+/**
+ * Descripción: Cancela la animación continua del auto iniciada con animarNuevo
+ * @method cancelarNuevaAnimacion
+ */
+let cancelarNuevaAnimacion = () =>{
     cancelAnimationFrame(intervalID);
 }
